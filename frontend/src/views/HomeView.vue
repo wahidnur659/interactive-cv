@@ -1,9 +1,9 @@
 <script setup>
 import Navbar from '@/components/Navbar.vue';
 import Hero from '@/components/Hero.vue';
-import Education from '@/components/Education.vue';
-import Skills from '@/components/Skills.vue';
-import Projects from '@/components/Projects.vue';
+import Education from '@/components/EducationSection.vue';
+import Skills from '@/components/SkillsSection.vue';
+import Projects from '@/components/ProjectsSection.vue';
 import Contact from '@/components/Contact.vue';
 </script>
 <template>
