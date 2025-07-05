@@ -1,20 +1,20 @@
 <script setup>
-import Navbar from '@/components/Navbar.vue';
-import Hero from '@/components/Hero.vue';
-import Education from '@/components/EducationSection.vue';
-import Skills from '@/components/SkillsSection.vue';
-import Projects from '@/components/ProjectsSection.vue';
-import Contact from '@/components/Contact.vue';
+import MainNavbar from '@/components/MainNavbar.vue';
+import HeroSection from '@/components/HeroSection.vue';
+import EducationSection from '@/components/EducationSection.vue';
+import SkillsSection from '@/components/SkillsSection.vue';
+import ProjectsSection from '@/components/ProjectsSection.vue';
+import ContactSection from '@/components/ContactSection.vue';
 </script>
 <template>
   <div>
-    <Navbar />
+    <MainNavbar />
     <main>
-      <Hero />
-      <div v-animate-on-scroll><Education /></div>
-      <div v-animate-on-scroll><Skills /></div>
-      <div v-animate-on-scroll><Projects /></div>
-      <div v-animate-on-scroll><Contact /></div>
+      <HeroSection />
+      <div v-animate-on-scroll><EducationSection /></div>
+      <div v-animate-on-scroll><SkillsSection /></div>
+      <div v-animate-on-scroll><ProjectsSection /></div>
+      <div v-animate-on-scroll><ContactSection /></div>
     </main>
   </div>
 </template>
