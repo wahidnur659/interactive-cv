@@ -52,14 +52,14 @@ export const projects = [
 {
     title: 'Aplikasi E-Commerce Sepatu',
     description: 'Proyek tugas akhir mata kuliah Pemrograman Web, membuat toko online dengan fitur keranjang belanja dan checkout.',
-    image: '/images/proyek-ecommerce.png',
+    image: '/images/lucien.jpg',
     tech: ['PHP', 'Laravel', 'Vue.js', 'MySQL', 'TailwindCSS'],
     link: 'https://github.com/GITikhsan/LUCIEN-AVENUE-FRONTEND.git', 
 },
 {
     title: 'Aplikasi E-Book Cendikia',
     description: 'Proyek Unit Kegiatan Mahasiswa Amikom Computer Club, membuat tempat membaca berupa E-book dengan fitur chat global dan membership.',
-    image: '/images/cendikia.png',
+    image: '/images/cendikia.jpg',
     tech: ['Flutter', 'Firebase', 'Dart'],
     link: 'https://github.com/wahidnur659/cendikia.git',
 },

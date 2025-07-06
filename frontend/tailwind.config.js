@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {
+      // backgroundImage: {
+      //   'hero-pattern': "url('/images/bg-cover.jpeg')",
+      // },
       keyframes: {
         'slide-in-left': { '0%': { transform: 'translateX(-100%)', opacity: '0' }, '100%': { transform: 'translateX(0)', opacity: '1' }, },
         'slide-in-right': { '0%': { transform: 'translateX(100%)', opacity: '0' }, '100%': { transform: 'translateX(0)', opacity: '1' }, },
