@@ -43,7 +43,7 @@ app.post('/api/send-email', async (req, res) => {
 
 // --- API ROUTES DENGAN PATH YANG BENAR UNTUK VERSI INI ---
 
-// Kembalikan '/api' di depan setiap rute
+// Rute API
 app.get('/api/education', (req, res) => {
   const lang = req.query.lang || 'id';
   res.json(lang === 'en' ? data_en.education : data_id.education);
