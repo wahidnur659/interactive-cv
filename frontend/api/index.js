@@ -1,4 +1,4 @@
-// /api/index.js
+// api/index.js
 
 import express from 'express';
 import cors from 'cors';
@@ -11,21 +11,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/test', (req, res) => {
+// Rute tes bisa dihapus atau dibiarkan, tidak masalah
+app.get('/api/test', (req, res) => {
   res.status(200).json({ message: 'Halo dari API Vercel!' });
 });
 
-// API untuk Email (menggunakan Environment Variables)
+// API untuk Email
 app.post('/api/send-email', async (req, res) => {
   const { name, email, message } = req.body;
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.GMAIL_USER, // <-- AMBIL DARI ENV VARIABLE
-      pass: process.env.GMAIL_PASS  // <-- AMBIL DARI ENV VARIABLE
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS
     }
   });
-  // ... (sisa kode nodemailer sama)
   const mailOptions = {
     from: `"${name}" <${email}>`,
     to: process.env.GMAIL_USER,
@@ -41,21 +41,22 @@ app.post('/api/send-email', async (req, res) => {
   }
 });
 
-// API Routes
-app.get('/education', (req, res) => {
+// --- API ROUTES DENGAN PATH YANG BENAR UNTUK VERSI INI ---
+
+// Kembalikan '/api' di depan setiap rute
+app.get('/api/education', (req, res) => {
   const lang = req.query.lang || 'id';
   res.json(lang === 'en' ? data_en.education : data_id.education);
 });
 
-app.get('/skills', (req, res) => {
+app.get('/api/skills', (req, res) => {
   const lang = req.query.lang || 'id';
   res.json(lang === 'en' ? data_en.skills : data_id.skills);
 });
 
-app.get('/projects', (req, res) => {
+app.get('/api/projects', (req, res) => {
   const lang = req.query.lang || 'id';
   res.json(lang === 'en' ? data_en.projects : data_id.projects);
 });
 
-// PENTING: Hapus app.listen dan export app
 export default app;
