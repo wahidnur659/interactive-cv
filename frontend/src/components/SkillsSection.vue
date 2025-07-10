@@ -16,7 +16,7 @@ const getLevel = (percentage) => {
 
 async function fetchSkills() {
   try {
-    const response = await axios.get(`http://localhost:3000/api/skills?lang=${lang.value}`);
+    const response = await axios.get(`/api/skills?lang=${lang.value}`);
     skills.value = response.data;
   } catch (error) {
     console.error(error);

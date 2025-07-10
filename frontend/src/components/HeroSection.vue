@@ -15,7 +15,7 @@ import { T } from '../store.js';
       <p class="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-2">
         {{ T.hero_kicker }}
       </p>      
-      <h1 class="text-5xl font-bold text-gray-800 dark:text-gray-100 mb-1">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-1">
         {{ T.hero_greeting }} <span class="text-orange-500">{{ 'Wahid Nurrohim.' }}</span>
       </h1>
       <h2 class="text-2xl font-medium text-gray-600 dark:text-gray-400 mb-6">

@@ -18,7 +18,7 @@ async function handleSubmit() {
   isSending.value = true;
   errorMessage.value = '';
   try {
-    await axios.post('http://localhost:3000/api/send-email', form);
+    await axios.post('/api/send-email', form);
     messageSent.value = true;
   } catch (error) {
     errorMessage.value = T.value.contact_error;

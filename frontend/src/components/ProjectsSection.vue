@@ -10,7 +10,7 @@ const projects = ref([]);
 async function fetchProjects() {
   try {
     // Tambahkan query parameter ?lang=... ke URL API
-    const response = await axios.get(`http://localhost:3000/api/projects?lang=${lang.value}`);
+    const response = await axios.get(`/api/projects?lang=${lang.value}`);
     projects.value = response.data;
   } catch (error) {
     console.error(error);
