@@ -11,8 +11,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get('/test', (req, res) => {
+  res.status(200).json({ message: 'Halo dari API Vercel!' });
+});
+
 // API untuk Email (menggunakan Environment Variables)
-app.post('/send-email', async (req, res) => {
+app.post('/api/send-email', async (req, res) => {
   const { name, email, message } = req.body;
   const transporter = nodemailer.createTransport({
     service: 'gmail',
