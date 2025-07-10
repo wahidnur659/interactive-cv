@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // API untuk Email (menggunakan Environment Variables)
-app.post('/api/send-email', async (req, res) => {
+app.post('/send-email', async (req, res) => {
   const { name, email, message } = req.body;
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -38,17 +38,17 @@ app.post('/api/send-email', async (req, res) => {
 });
 
 // API Routes
-app.get('/api/education', (req, res) => {
+app.get('/education', (req, res) => {
   const lang = req.query.lang || 'id';
   res.json(lang === 'en' ? data_en.education : data_id.education);
 });
 
-app.get('/api/skills', (req, res) => {
+app.get('/skills', (req, res) => {
   const lang = req.query.lang || 'id';
   res.json(lang === 'en' ? data_en.skills : data_id.skills);
 });
 
-app.get('/api/projects', (req, res) => {
+app.get('/projects', (req, res) => {
   const lang = req.query.lang || 'id';
   res.json(lang === 'en' ? data_en.projects : data_id.projects);
 });
