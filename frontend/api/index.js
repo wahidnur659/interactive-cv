@@ -3,6 +3,7 @@
 import express from 'express';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
+import process from 'node:process';
 import { data_id, data_en } from './data.js';
 
 const app = express();
