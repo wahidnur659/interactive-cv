@@ -50,6 +50,8 @@ const translations = {
     contact_thanks_strong: 'Terima kasih!',
     contact_thanks_span: ' Pesanmu sudah berhasil terkirim.',
     contact_error: 'Gagal mengirim pesan, coba lagi nanti.',
+    // Project Section
+    project_button: 'Lihat Detail', // <-- TAMBAHKAN INI
     // Footer
     footer_made_with: 'Dibuat dengan',
   },
@@ -82,6 +84,8 @@ const translations = {
     contact_thanks_strong: 'Thank you!',
     contact_thanks_span: ' Your message has been sent successfully.',
     contact_error: 'Failed to send message, please try again later.',
+    // Project Section
+    project_button: 'View Detail', 
     // Footer
     footer_made_with: 'Made with',
   }
