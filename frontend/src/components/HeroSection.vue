@@ -35,8 +35,8 @@ function setAnimationTimeout(callback, delay) {
 
 
 // Teks sumber
-const fullGreeting = computed(() => T.value.hero_greeting + ' ')
-const fullName = 'Wahid Nurrohim.'
+const fullGreeting = computed(() => T.value.hero_greeting)
+const fullName = computed(() => ' Wahid Nurrohim.') // Pakai computed agar reaktif jika perlu
 const fullRole = computed(() => T.value.hero_role)
 
 // 1. Mengetik "Halo, Saya"
@@ -55,12 +55,12 @@ function typeGreeting() {
   type()
 }
 
-// 2. Mengetik "Wahid Nurrohim."
+// 2. Mengetik " Wahid Nurrohim."
 function typeName() {
   let i = 0
   function type() {
-    if (i < fullName.length) {
-      typedName.value += fullName.charAt(i)
+    if (i < fullName.value.length) {
+      typedName.value += fullName.value.charAt(i)
       i++
       setAnimationTimeout(type, greetingTypingSpeed)
     } else {
@@ -133,8 +133,8 @@ onMounted(startAnimation)
         {{ T.hero_kicker }}
       </p>      
       
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-1 h-20 md:h-14">
-        {{ typedGreeting }}<span class="text-orange-500">{{ typedName }}</span><span v-if="showNameCursor" class="blinking-cursor">|</span>
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-1">
+        <span>{{ typedGreeting }}</span><span class="text-orange-500">{{ typedName }}</span><span v-if="showNameCursor" class="blinking-cursor">|</span>
       </h1>
       
       <h2 class="text-2xl font-medium text-gray-600 dark:text-gray-400 mb-6 h-8">
