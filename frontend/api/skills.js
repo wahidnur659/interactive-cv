@@ -5,9 +5,10 @@ const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
   try {
-    // Ambil semua data skill dari tabel 'skill'
     const skills = await prisma.skill.findMany({
-      // Anda bisa menambahkan 'orderBy', dll. jika diperlukan
+      orderBy: {
+        percentage: 'desc', // Urutkan dari persentase tertinggi
+      }
     });
 
     res.setHeader('Access-Control-Allow-Origin', '*');

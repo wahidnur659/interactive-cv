@@ -4,16 +4,15 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
-  const lang = req.query.lang || 'id'; // Ambil bahasa dari query parameter
+  const lang = req.query.lang || 'id'; // Ambil bahasa dari query param
 
   try {
-    // Ambil data edukasi dari tabel 'education' berdasarkan bahasa
     const education = await prisma.education.findMany({
       where: {
-        language: lang,
+        language: lang, // Filter berdasarkan bahasa
       },
-      orderBy: { // Contoh: urutkan berdasarkan ID secara descending (terbaru di atas)
-        id: 'desc',
+      orderBy: {
+        id: 'asc', // Urutkan dari id terkecil (paling lama ke terbaru)
       },
     });
 
