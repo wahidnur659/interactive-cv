@@ -1,115 +1,123 @@
 <script setup>
-import { ref, onMounted, watch, computed } from 'vue';
+import { onMounted, ref, watch, computed } from 'vue'
 // Impor T (translations) dan lang (bahasa) dari store
-import { T, lang } from '../store.js';
+import { T, lang } from '../store.js'
 
-// --- DI SINI TEMPAT MENGATUR KECEPATAN ---
-// Kecepatan untuk "Halo, Saya Wahid Nurrohim."
-const greetingTypingSpeed = 100; // Angka lebih besar = lebih lambat
+// --- PENGATURAN KECEPATAN ---
+const greetingTypingSpeed = 100
+const roleTypingSpeed = 120
+const roleErasingSpeed = 60
+const delayBeforeErase = 2000
 
-// Kecepatan untuk "Web Developer" yang berulang
-const roleTypingSpeed = 100;
-const roleErasingSpeed = 100;
-const delayBeforeErase = 5000; 
+// --- State untuk teks ---
+const typedGreeting = ref('')
+const typedName = ref('')
+const typedRole = ref('')
+const showNameCursor = ref(false)
+const showRoleCursor = ref(false)
 
-// --- State untuk setiap bagian teks ---
-const typedGreeting = ref('');
-const typedName = ref('');
-const typedRole = ref(''); // State baru untuk role
-const showNameCursor = ref(false); // Kursor untuk nama
-const showRoleCursor = ref(false); // Kursor untuk role
+// --- BAGIAN PENTING UNTUK FIX BUG ---
+// Array untuk menyimpan semua ID dari setTimeout yang sedang berjalan
+let timeoutIds = []
 
-// Teks sumber diambil dari 'store'
-const fullGreeting = computed(() => T.value.hero_greeting + ' ');
-const fullName = 'Wahid Nurrohim.';
-const fullRole = computed(() => T.value.hero_role);
+// Fungsi untuk membersihkan semua timeout
+function clearAllTimeouts() {
+  timeoutIds.forEach(id => clearTimeout(id))
+  timeoutIds = []
+}
 
-// --- FUNGSI-FUNGSI ANIMASI ---
+// Wrapper untuk setTimeout agar ID-nya tersimpan
+function setAnimationTimeout(callback, delay) {
+  const id = setTimeout(callback, delay)
+  timeoutIds.push(id)
+}
+// --- AKHIR DARI BAGIAN FIX BUG ---
+
+
+// Teks sumber
+const fullGreeting = computed(() => T.value.hero_greeting + ' ')
+const fullName = 'Wahid Nurrohim.'
+const fullRole = computed(() => T.value.hero_role)
 
 // 1. Mengetik "Halo, Saya"
 function typeGreeting() {
-  let i = 0;
+  let i = 0
   function type() {
     if (i < fullGreeting.value.length) {
-      typedGreeting.value += fullGreeting.value.charAt(i);
-      i++;
-      setTimeout(type, greetingTypingSpeed);
+      typedGreeting.value += fullGreeting.value.charAt(i)
+      i++
+      setAnimationTimeout(type, greetingTypingSpeed)
     } else {
-      showNameCursor.value = true;
-      typeName(); // Lanjut ke nama
+      showNameCursor.value = true
+      typeName()
     }
   }
-  type();
+  type()
 }
 
 // 2. Mengetik "Wahid Nurrohim."
 function typeName() {
-  let i = 0;
+  let i = 0
   function type() {
     if (i < fullName.length) {
-      typedName.value += fullName.charAt(i);
-      i++;
-      setTimeout(type, greetingTypingSpeed);
+      typedName.value += fullName.charAt(i)
+      i++
+      setAnimationTimeout(type, greetingTypingSpeed)
     } else {
-      showNameCursor.value = false; // Sembunyikan kursor nama
-      showRoleCursor.value = true; // Tampilkan kursor role
-      setTimeout(typeRole, 500); // Jeda sebelum mengetik role
+      showNameCursor.value = false
+      showRoleCursor.value = true
+      setAnimationTimeout(typeRole, 500)
     }
   }
-  type();
+  type()
 }
 
 // 3. Mengetik dan menghapus "Web Developer" (looping)
-let roleCharIndex = 0;
-let isErasingRole = false;
+let roleCharIndex = 0
+let isErasingRole = false
 function typeRole() {
-  // Pastikan kursor role selalu terlihat selama animasi ini
-  showRoleCursor.value = true;
-
+  showRoleCursor.value = true
   if (isErasingRole) {
-    // Fase Menghapus
     if (typedRole.value.length > 0) {
-      typedRole.value = fullRole.value.substring(0, typedRole.value.length - 1);
-      setTimeout(typeRole, roleErasingSpeed);
+      typedRole.value = fullRole.value.substring(0, typedRole.value.length - 1)
+      setAnimationTimeout(typeRole, roleErasingSpeed)
     } else {
-      isErasingRole = false;
-      roleCharIndex = 0;
-      setTimeout(typeRole, roleTypingSpeed);
+      isErasingRole = false
+      roleCharIndex = 0
+      setAnimationTimeout(typeRole, roleTypingSpeed)
     }
   } else {
-    // Fase Mengetik
     if (roleCharIndex < fullRole.value.length) {
-      typedRole.value += fullRole.value.charAt(roleCharIndex);
-      roleCharIndex++;
-      setTimeout(typeRole, roleTypingSpeed);
+      typedRole.value += fullRole.value.charAt(roleCharIndex)
+      roleCharIndex++
+      setAnimationTimeout(typeRole, roleTypingSpeed)
     } else {
-      isErasingRole = true;
-      setTimeout(typeRole, delayBeforeErase);
+      isErasingRole = true
+      setAnimationTimeout(typeRole, delayBeforeErase)
     }
   }
 }
 
-// Fungsi utama untuk mereset dan memulai seluruh animasi
+// Fungsi utama untuk memulai/mereset animasi
 function startAnimation() {
-  typedGreeting.value = '';
-  typedName.value = '';
-  typedRole.value = '';
-  showNameCursor.value = false;
-  showRoleCursor.value = false;
-  roleCharIndex = 0;
-  isErasingRole = false;
+  clearAllTimeouts() // <-- HENTIKAN SEMUA ANIMASI LAMA SEBELUM MEMULAI
 
-  // Hapus timeout yang mungkin berjalan untuk mencegah tumpang tindih
-  // (Penyederhanaan, untuk kasus kompleks butuh clear timeout yang lebih canggih)
-  setTimeout(typeGreeting, 500); // Mulai dari awal
+  typedGreeting.value = ''
+  typedName.value = ''
+  typedRole.value = ''
+  showNameCursor.value = false
+  showRoleCursor.value = false
+  roleCharIndex = 0
+  isErasingRole = false
+  
+  setAnimationTimeout(typeGreeting, 500)
 }
 
 // Awasi perubahan bahasa, lalu mulai ulang animasi
-watch(lang, startAnimation);
+watch(lang, startAnimation)
 
-// Mulai animasi pertama kali saat komponen dimuat
-onMounted(startAnimation);
-
+// Mulai animasi pertama kali
+onMounted(startAnimation)
 </script>
 
 <template>
@@ -125,7 +133,7 @@ onMounted(startAnimation);
         {{ T.hero_kicker }}
       </p>      
       
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-1">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-1 h-20 md:h-14">
         {{ typedGreeting }}<span class="text-orange-500">{{ typedName }}</span><span v-if="showNameCursor" class="blinking-cursor">|</span>
       </h1>
       
