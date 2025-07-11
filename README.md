@@ -44,4 +44,4 @@ Ingin mencoba menjalankan proyek ini di mesin lokal Anda? Ikuti langkah-langkah 
 ### **1. Klon Repositori**
 ```bash
 git clone https://github.com/wahidnur659/interactive-cv.git
-cd [interactive-cv]
+cd interactive-cv
