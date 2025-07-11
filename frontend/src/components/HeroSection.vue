@@ -8,9 +8,9 @@ import { T, lang } from '../store.js';
 const greetingTypingSpeed = 100; // Angka lebih besar = lebih lambat
 
 // Kecepatan untuk "Web Developer" yang berulang
-const roleTypingSpeed = 120;
-const roleErasingSpeed = 60;
-const delayBeforeErase = 2000; // Jeda 2 detik sebelum menghapus
+const roleTypingSpeed = 100;
+const roleErasingSpeed = 100;
+const delayBeforeErase = 5000; 
 
 // --- State untuk setiap bagian teks ---
 const typedGreeting = ref('');
