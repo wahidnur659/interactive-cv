@@ -122,7 +122,7 @@ onMounted(startAnimation)
 
 <template>
   <section id="profil" 
-    class="bg-teal-50 dark:bg-gray-900 transition-colors duration-300 container mx-auto px-6 flex flex-col md:flex-row items-center min-h-screen"
+    class="bg-teal-50 dark:bg-gray-900 transition-colors duration-300 container mx-auto px-6 flex flex-col md:flex-row items-center min-h-screen pt-24 pb-12 md:py-0"
   >
     <div class="md:w-1/2 w-full self-stretch mb-10 md:mb-0 animate-slidein-left">
       <img src="/images/pp.jpg" alt="Foto Profil" class="w-full h-full object-cover">
